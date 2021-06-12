@@ -47,4 +47,13 @@ describe('SearchComponent', () => {
     app.sort('id');
     expect(app.searchData).toEqual(expectedData);
   });
+
+  it('onScroll has been called', () => {
+    const fixture = TestBed.createComponent(SearchComponent);
+    const app = fixture.componentInstance;
+    app.page  = 1;
+    app.onScroll();
+    expect(app.page).toBe(2);
+  });
+
 });

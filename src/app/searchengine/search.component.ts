@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { SearchService } from './search.component.service';
-
+import * as moment from 'moment';
 @Component({
     selector: 'app-search',
     templateUrl: './search.component.html',
@@ -33,18 +33,23 @@ export class SearchComponent implements OnInit {
                     this.searchItem = term;
                     this.service.search(term, this.page).subscribe(
                         data => {
-                            this.searchData = data;
-                            this.shortData();
-                        });
+                            this.searchData = this.convertDateFormat(data);
+                         });
 
                 }
             }
             );
 
         }
-ngOnChange() {
-    this.shortData();
-}
+
+        convertDateFormat(data) {
+            data.forEach(element => {
+               element.created_at  =
+               moment(element.created_at).format('MM/DD/YYYY');
+         });
+            return data;
+        }
+
 
     redirectToRepos(url) {
         window.open(url, '_blank');
@@ -54,17 +59,12 @@ ngOnChange() {
         this.page = this.page + 1;
         this.service.search(this.searchItem, this.page).subscribe(
             data => {
-                console.log(data);
+               data =  this.convertDateFormat(data);
                 this.searchData = this.searchData.concat(data);
-               
-            });
-            this.shortData();
+           });
     }
 
-    shortData() {
-        this.searchData.length > 0 ?
-        this.showShort = true : this.showShort = false;
-    }
+   
 
     sort(key) {
     const sortingKey = key;

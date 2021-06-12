@@ -6,7 +6,7 @@
         (scrolled)="onScroll()">
         <form>
 
-            <input name="Search" [formControl]="searchTerm" class="inputBox" />
+            <input name="Search" [formControl]="searchTerm" class="inputBox" placeholder="Search" autocomplete="off"/>
         </form>
         <section class="sortData">
             <div *ngIf=" searchData && searchData.length > 0" >
@@ -19,24 +19,29 @@
         </section>
         <div class="main">
             <div *ngFor="let obj of searchData">
-                <div (click)="redirectToRepos(obj.html_url)" class="flex-container">
-                    <div class="image-col"><img src={{obj.owner.avatar_url}} class="avatarImage" /></div>
-
-                    <div class="name-col">
-                        <span> {{obj.name}}</span>
-                    </div>
-
-                    <div class="license-col">
+                 <div class="card" (click)="redirectToRepos(obj.html_url)">
+                    <div class ="row">
+                        <div class="name-col">
+                    <img src={{obj.owner.avatar_url}} alt="Avatar" class="avatarImage" >
+                    <div class="container">
+                      <h4><b>{{obj.owner.login}}</b></h4> 
+                    </div></div>
+                    <div class="watch-col">
+                        <h4>{{obj.name}}</h4>
                         <div *ngIf="(obj.license | json) != 'null'">License : {{obj.license.name}}</div>
-                       
+                        <div *ngIf="(obj.license | json) != 'null'">Key : {{obj.license.key}}</div>
                     </div>
                     <div class="watch-col">
-                    <div *ngIf="(obj.license | json) != 'null'">Key : {{obj.license.key}}</div>
-                </div> 
-                    <div class="watch-col">
-                        Watchers: {{obj.watchers}}
+                       <h4> Watchers- {{obj.watchers}} </h4>
                     </div>
-                </div>
+                    <div class="id-col">
+                        <h5>Id - {{obj.id}}</h5>
+                     </div>
+                     <div class="date-col">
+                        <h4> {{obj.created_at}} </h4>
+                     </div>
+                    </div>
+                  </div>
             </div>
         </div>
 

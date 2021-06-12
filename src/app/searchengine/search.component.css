@@ -40,8 +40,8 @@ body {
       margin:10px;
   }
   .avatarImage{
-      width:50px;
-      height:50px;
+      width:80px;
+      height:80px;
   }
   .main{
      margin:5%;
@@ -68,12 +68,13 @@ body {
    
     
  }
-  .license-col{
-      width:300px;
-  }
+ .id-col{
+  margin-left:200px;
+  margin-top: 98px;
+ }
   .sortData{
     display: inline-block;
-    width: 17%;
+    width: 28%;
     float: right;   
   }
   .image-col{
@@ -91,4 +92,33 @@ body {
 
 select {
   width:200px; height:40px; font-size: 18px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 70%;
+  height:120px;
+  margin-left:14%;
+  padding:2%;
+  cursor: pointer;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: -2px 16px;
+  margin-bottom:5px;
+}
+
+.row {
+  display: flex;
+  text-align: left;
+}
+
+.date-col{
+ margin-left:200px;
+ margin-top: 104px;
 }
