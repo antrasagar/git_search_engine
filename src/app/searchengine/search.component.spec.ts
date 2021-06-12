@@ -52,6 +52,12 @@ describe('SearchComponent', () => {
     const fixture = TestBed.createComponent(SearchComponent);
     const app = fixture.componentInstance;
     app.page  = 1;
+    const data = [{ id: 1, name: 'demo1' },
+    { id: 5, name: 'demo1' }, { id: 2, name: 'demo1' }];
+    const expectedData = [{ id: 1, name: 'demo1' },
+    { id: 2, name: 'demo1' }, { id: 5, name: 'demo1' }];
+    app.searchData = data;
+    app.sortingKey = 'id';
     app.onScroll();
     expect(app.page).toBe(2);
   });

@@ -15,15 +15,20 @@ export class SearchComponent implements OnInit {
     searchItem: any;
     sortArray = [];
     showShort: boolean;
+    sortingKey: any;
     constructor(private service: SearchService) {
 
     }
     ngOnInit() {
         this.page = 1;
-        this.sortArray = [{ id: 'ID', value: 'id' },
-        { id: 'NAME', value: 'name' }, { id: 'WATCH', value: 'watchers' }];
+        this.sortArray = [{ id: 'Id', value: 'id' },
+        { id: 'Name', value: 'name' },
+        { id: 'Watch', value: 'watchers' },
+        {
+            id: 'Created Date', value: 'created_at'
+        }];
         this.searchApiCall();
-        
+
     }
 
     searchApiCall() {
@@ -34,21 +39,21 @@ export class SearchComponent implements OnInit {
                     this.service.search(term, this.page).subscribe(
                         data => {
                             this.searchData = this.convertDateFormat(data);
-                         });
+                        });
 
                 }
             }
-            );
+        );
 
-        }
+    }
 
-        convertDateFormat(data) {
-            data.forEach(element => {
-               element.created_at  =
-               moment(element.created_at).format('MM/DD/YYYY');
-         });
-            return data;
-        }
+    convertDateFormat(data) {
+        data.forEach(element => {
+            element.created_at =
+                moment(element.created_at).format('MM/DD/YYYY');
+        });
+        return data;
+    }
 
 
     redirectToRepos(url) {
@@ -59,17 +64,31 @@ export class SearchComponent implements OnInit {
         this.page = this.page + 1;
         this.service.search(this.searchItem, this.page).subscribe(
             data => {
-               data =  this.convertDateFormat(data);
+                data = this.convertDateFormat(data);
                 this.searchData = this.searchData.concat(data);
-           });
+            });
+        this.sort(this.sortingKey);
     }
 
-   
+
+    public sortByDueDate(): void {
+        this.searchData.sort((a, b) => {
+            return a.created_at < b.created_at ? -1 :
+                (a.created_at > b.created_at ? 1 : 0);
+        });
+    }
 
     sort(key) {
-    const sortingKey = key;
-    this.searchData =
-    this.searchData.sort((a, b) =>
-    a[sortingKey] < b[sortingKey]? -1 : a[sortingKey] > b[sortingKey] ? 1 : 0);
+        this.sortingKey = key;
+        if (this.sortingKey === 'created_at') {
+            this.sortByDueDate();
+
+        } else {
+            this.searchData =
+                this.searchData.sort((a, b) =>
+                    a[this.sortingKey] < b[this.sortingKey] ? -1 : a[this.sortingKey] >
+                        b[this.sortingKey] ? 1 : 0);
+
+        }
     }
 }

@@ -11,7 +11,7 @@
         <section class="sortData">
             <div *ngIf=" searchData && searchData.length > 0" >
                 <select (change)="sort($event.target.value)">
-                    <option>Sort BY</option>
+                    <option>Sort By</option>
                     <option *ngFor="let array of sortArray" value={{array.value}}>
                         {{array.id}}</option>
                 </select>
@@ -27,15 +27,17 @@
                       <h4><b>{{obj.owner.login}}</b></h4> 
                     </div></div>
                     <div class="watch-col">
-                        <h4>{{obj.name}}</h4>
+                        <h3>{{obj.name}}</h3>
                         <div *ngIf="(obj.license | json) != 'null'">License : {{obj.license.name}}</div>
                         <div *ngIf="(obj.license | json) != 'null'">Key : {{obj.license.key}}</div>
+                        <div *ngIf="(obj.id | json) != 'null'"> Id - {{obj.id}}</div>
+                        <div *ngIf="(obj.watchers | json) != 'null'"> Watchers count- {{obj.watchers}}</div>
                     </div>
                     <div class="watch-col">
-                       <h4> Watchers- {{obj.watchers}} </h4>
+                       
                     </div>
                     <div class="id-col">
-                        <h5>Id - {{obj.id}}</h5>
+                       
                      </div>
                      <div class="date-col">
                         <h4> {{obj.created_at}} </h4>
