@@ -1,53 +1,57 @@
 <header class="header">
     <h1>Search Engine</h1>
 </header>
-<section>
-    <div class="container" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
-        (scrolled)="onScroll()">
-        <form>
+<div class="container" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll()">
+    <form>
 
-            <input name="Search" [formControl]="searchTerm" class="inputBox" placeholder="Search" autocomplete="off"/>
-        </form>
-        <section class="sortData">
-            <div *ngIf=" searchData && searchData.length > 0" >
+        <input name="Search" [formControl]="searchTerm" class="inputBox" placeholder="Search" autocomplete="off" />
+    </form>
+
+    <div class="main">
+        <div class="sorting-div-block">
+            <div *ngIf=" searchData && searchData.length > 0">
                 <select (change)="sort($event.target.value)">
                     <option>Sort By</option>
                     <option *ngFor="let array of sortArray" value={{array.value}}>
                         {{array.id}}</option>
                 </select>
             </div>
-        </section>
-        <div class="main">
+        </div>
+        <div>
             <div *ngFor="let obj of searchData">
-                 <div class="card" (click)="redirectToRepos(obj.html_url)">
-                    <div class ="row">
+                <div class="card" (click)="redirectToRepos(obj.html_url)">
+                    <div class="row">
                         <div class="name-col">
-                    <img src={{obj.owner.avatar_url}} alt="Avatar" class="avatarImage" >
-                    <div class="container">
-                      <h4><b>{{obj.owner.login}}</b></h4> 
-                    </div></div>
-                    <div class="watch-col">
-                        <h3>{{obj.name}}</h3>
-                        <div *ngIf="(obj.license | json) != 'null'">License : {{obj.license.name}}</div>
-                        <div *ngIf="(obj.license | json) != 'null'">Key : {{obj.license.key}}</div>
-                        <div *ngIf="(obj.id | json) != 'null'"> Id - {{obj.id}}</div>
-                        <div *ngIf="(obj.watchers | json) != 'null'"> Watchers count- {{obj.watchers}}</div>
+                            <img src={{obj.owner.avatar_url}} alt="Avatar" class="avatarImage">
+                            <div class="login-name">{{obj.owner.login}}
+                            </div>
+                        </div>
+                        <div class="watch-col">
+                            <div class="repo-name text" maxlength="20">{{obj.name}}</div>
+                            <p>
+                                <span *ngIf="(obj.license | json) != 'null'">
+                                    License : {{obj.license.name}}
+                                </span>
+
+                            </p>
+                            <p>
+                                <span *ngIf="(obj.license | json) != 'null'"> Key : {{obj.license.key}}</span>
+                            </p>
+                            <p>
+                                <span *ngIf="(obj.id | json) != 'null'">Id - {{obj.id}} </span>
+                                <span *ngIf="(obj.watchers | json) != 'null'">Watchers count- {{obj.watchers}} </span>
+                            </p>
+                        </div>
+                        <div class="date-col">
+                            <h4> {{obj.created_at}} </h4>
+                        </div>
                     </div>
-                    <div class="watch-col">
-                       
-                    </div>
-                    <div class="id-col">
-                       
-                     </div>
-                     <div class="date-col">
-                        <h4> {{obj.created_at}} </h4>
-                     </div>
-                    </div>
-                  </div>
+                </div>
             </div>
         </div>
-
-
-
     </div>
-</section>
+
+
+
+</div>

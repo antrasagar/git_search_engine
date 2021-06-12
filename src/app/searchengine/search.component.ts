@@ -22,7 +22,6 @@ export class SearchComponent implements OnInit {
     ngOnInit() {
         this.page = 1;
         this.sortArray = [{ id: 'Id', value: 'id' },
-        { id: 'Name', value: 'name' },
         { id: 'Watch', value: 'watchers' },
         {
             id: 'Created Date', value: 'created_at'
@@ -73,10 +72,11 @@ export class SearchComponent implements OnInit {
 
     public sortByDueDate(): void {
         this.searchData.sort((a, b) => {
-            return a.created_at < b.created_at ? -1 :
-                (a.created_at > b.created_at ? 1 : 0);
+               const aValue = (a.created_at) ? Number(new Date(a.created_at)) : Number(new Date(0));
+               const bValue = (b.created_at) ? Number(new Date(b.created_at)) : Number(new Date(0));
+               return bValue - aValue;
         });
-    }
+        }
 
     sort(key) {
         this.sortingKey = key;

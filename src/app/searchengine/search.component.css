@@ -37,14 +37,13 @@ body {
   }
   span {
       text-align:center;
-      margin:10px;
   }
   .avatarImage{
       width:80px;
       height:80px;
   }
   .main{
-     margin:5%;
+     margin:3%;
   }
 
   .flex-container {
@@ -82,11 +81,11 @@ body {
       height:50px;
   }
   .name-col{
-    width:200px;
+    width:15%;
     height:50px;
 }
 .watch-col{
-    width:200px;
+    width:70%;
     height:50px;
     text-overflow: ellipsis; 
 }
@@ -121,6 +120,40 @@ select {
 }
 
 .date-col{
- margin-left:200px;
- margin-top: 104px;
+text-align: right; margin-top: 104px;
+}
+
+.repo-name {
+font-weight: bold;
+font-size:  20px;
+}
+
+.text {
+    display: block;
+    width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  
+}
+
+.login-name{
+  display: block;
+  width: 100px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: bold;
+  font-size:  15px;
+}
+.repo-name:hover{
+  overflow: visible; 
+  white-space: normal;
+  height:auto; 
+}
+.sorting-div-block{
+  display:flex;
+  flex-direction: row-reverse;
+  margin-bottom: 1%;
+  margin-right: 12%;
 }
